@@ -4,18 +4,14 @@ import './App.css';
 
 function App() {
   const [setlists, setSetlists] = useState([]);
-  const API_KEY = import.meta.env.VITE_SETLISTFM_API_KEY;
+  const API_KEY = import.meta.env.VITE_SETLIST_API_KEY;
   const BASE_URL = 'https://api.setlist.fm/rest/1.0'
 
   useEffect(() => {
     const fetchSetlists = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}search/setlists`, {
-          params: { artistName: "Radiohead" },
-          headers: {
-            "x-api-key": API_KEY,
-            Accept: "application/json",
-          },
+        const response = await axios.get("http://localhost:3000/api/setlists", {
+          params: { artist: "Radiohead" },
         });
         setSetlists(response.data.setlist || []);
       } catch (error) {
