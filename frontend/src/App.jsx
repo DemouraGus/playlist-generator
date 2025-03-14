@@ -1,40 +1,19 @@
 import { useEffect, useState } from 'react';
-import axios from "axios";
+import useSetlists from './hooks/useSetlists';
 import './App.css';
+import SetlistsList from './components/SetlistsList';
 
 function App() {
-  const [setlists, setSetlists] = useState([]);
-  const API_KEY = import.meta.env.VITE_SETLIST_API_KEY;
-  const BASE_URL = 'https://api.setlist.fm/rest/1.0'
-
-  useEffect(() => {
-    const fetchSetlists = async () => {
-      try {
-        const response = await axios.get("http://localhost:3000/api/setlists", {
-          params: { artist: "Radiohead" },
-        });
-        setSetlists(response.data.setlist || []);
-      } catch (error) {
-        console.error("Error fetching setlists:", error);
-      }
-    };
-    
-    fetchSetlists()
-  }, [API_KEY]);
+  const [artist, setArtist] = useState("Radiohead");
+  const { setlists, loading, error} = useSetlists(artist);
 
   return (
     <div className="App">
       <nav>This is the nav bar</nav>
-      <h1>Setlists</h1>
-      <ul>
-        {setlists.length > 0 ? (
-          setlists.map((setlist, index) => (
-            <li key={index}>{setlist.venue?.name} - {setlist.eventDate}</li>
-          ))
-        ) : (
-          <p>Loading or no results found...</p>
-        )}
-      </ul>
+      <h1>Setlists for {artist}</h1>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error.message}</p>}
+      <SetlistsList setlists={setlists} />
     </div>
   )
 };
