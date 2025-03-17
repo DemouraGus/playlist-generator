@@ -1,13 +1,20 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 
-const useSetlists = (artist) => {
+const useSetlists = () => {
+  const [artist, setArtist] = useState("");
+  const [inputValue, setInputValue] = useState("");
   const [setlists, setSetlists] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (!artist) return;
+
     const fetchSetlists = async () => {
+      setLoading(true);
+      setError(null);
+
       try {
         const response = await axios.get("http://localhost:3000/api/setlists", {
           params: { artist },
@@ -23,7 +30,19 @@ const useSetlists = (artist) => {
     fetchSetlists();
   }, [artist]);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (inputValue.trim()) {
+      setArtist(inputValue);
+      setInputValue("");
+    }
+  };
+
   return {
+    artist,
+    inputValue,
+    setInputValue,
+    handleSubmit,
     setlists,
     loading,
     error
