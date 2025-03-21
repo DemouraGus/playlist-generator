@@ -17,7 +17,7 @@ function App() {
   return (
     <div className="App">
       <nav>This is the nav bar</nav>
-      <h1>{artist? `Setlists for {artist}` : "Search for setlists"}</h1>
+      <h1>{artist? `Setlists for ${artist}` : "Search for setlists"}</h1>
       <SearchForm 
         handleSubmit={handleSubmit} 
         inputValue={inputValue} 
