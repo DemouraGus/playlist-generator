@@ -39,4 +39,7 @@ A better understanding of setlist.fm API will help figure out what need to be ke
 - album
 - year
 
+# Troubleshooting
+- How to differentiate between songs with the same name or different versions of the same song?
+- Does the user need to be logged in a Spotify account?
 
