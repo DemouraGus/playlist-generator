@@ -2,6 +2,7 @@ import useSetlists from './hooks/useSetlists';
 import './App.css';
 import SetlistsList from './components/SetlistsList';
 import SearchForm from './components/SearchForm';
+import NavigationBar from './components/NavigationBar';
 
 function App() {
   const {
@@ -16,7 +17,7 @@ function App() {
 
   return (
     <div className="App">
-      <nav>This is the nav bar</nav>
+      <NavigationBar />
       <h1>{artist? `Setlists for ${artist}` : "Search for setlists"}</h1>
       <SearchForm 
         handleSubmit={handleSubmit} 
