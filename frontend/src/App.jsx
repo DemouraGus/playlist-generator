@@ -4,6 +4,7 @@ import './App.css';
 import SetlistsList from './components/SetlistsList';
 import SearchForm from './components/SearchForm';
 import NavigationBar from './components/NavigationBar';
+import SetlistDetails from './components/SetlistDetails';
 
 function App() {
   const {
@@ -35,6 +36,7 @@ function App() {
         } />
         <Route path="/setlists" element={<SetlistsList setlists={setlists} />} />
         <Route path="/about" element={<h1>About This App</h1>} />
+        <Route path="/setlists/:id" element={<SetlistDetails setlists={setlists} />}></Route>
       </Routes>
     </div>
   );
